@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  build-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Add wasm target
+        run: |
+          rustup target add wasm32v1-none
+
+      - name: Build LumFlow contract (wasm)
+        run: |
+          cargo build --manifest-path lumflow_contract/Cargo.toml --target wasm32v1-none --release
+
+      - name: Run cargo fmt check
+        run: cargo fmt -- --check || true
+
+      - name: Run cargo clippy (optional)
+        run: |
+          cargo clippy --manifest-path lumflow_contract/Cargo.toml -- -D warnings || true

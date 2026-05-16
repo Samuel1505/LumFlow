@@ -1,0 +1,11 @@
+[package]
+name = "lumflow_contract"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Use the Soroban SDK from the official repo to keep the scaffold up-to-date.
+soroban-sdk = { git = "https://github.com/stellar/rs-soroban-sdk" }

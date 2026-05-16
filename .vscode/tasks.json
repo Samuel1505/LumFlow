@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build LumFlow contract (wasm)",
+      "type": "shell",
+      "command": "cargo build --manifest-path lumflow_contract/Cargo.toml --target wasm32v1-none --release",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$rustc"]
+    }
+  ]
+}
